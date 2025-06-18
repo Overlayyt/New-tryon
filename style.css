@@ -153,6 +153,7 @@ video, canvas {
 #info-btn:hover {
   background-color: #e6c200;
 }
+<button id="info-btn" style="position: absolute; top: 10px; right: 10px; z-index: 1000;">ℹ️ Info</button>
 
 /* Modal Overlay */
 #info-modal {

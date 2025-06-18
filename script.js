@@ -25,6 +25,14 @@ async function initializeImages() {
   necklaceImg = await loadImage(necklaceSrc);
 }
 initializeImages();
+// Info modal open/close handlers
+document.getElementById('info-btn').addEventListener('click', () => {
+  document.getElementById('info-modal').style.display = 'block';
+});
+
+function closeInfoModal() {
+  document.getElementById('info-modal').style.display = 'none';
+}
 
 // Function to change earring
 function changeEarring(filename) {
