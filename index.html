@@ -10,6 +10,76 @@
 <body>
   <video id="webcam" autoplay muted playsinline></video>
   <canvas id="overlay"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Overlay Jewels Try-On</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #info-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      z-index: 9999;
+      max-width: 90%;
+      width: 400px;
+    }
+    .info-content ul {
+      padding-left: 20px;
+    }
+    .close-btn {
+      background-color: #ffd700;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Info Button -->
+  <button id="info-btn">ℹ️</button>
+
+  <!-- Info Modal -->
+  <div id="info-modal">
+    <div class="info-content">
+      <h2>How to Use the Try-On App</h2>
+      <ul>
+        <li>Open the camera and scan the QR code.</li>
+        <li>Allow camera access when prompted.</li>
+        <li>Choose a jewelry item (earrings, necklace, etc.).</li>
+        <li>See it live on your face in real-time!</li>
+        <li>Try different styles, capture a photo if you like.</li>
+      </ul>
+      <button onclick="toggleInfoModal()" class="close-btn">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const infoBtn = document.getElementById('info-btn');
+    const infoModal = document.getElementById('info-modal');
+
+    function toggleInfoModal() {
+      if (infoModal.style.display === 'block') {
+        infoModal.style.display = 'none';
+      } else {
+        infoModal.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
 
   <!-- Branding with Camera Icon -->
   <div id="branding">
