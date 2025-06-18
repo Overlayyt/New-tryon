@@ -8,7 +8,10 @@ let necklaceSrc = 'necklaces/necklace1.png';
 
 let earringImg = null;
 let necklaceImg = null;
-
+function toggleInfoModal() {
+  const modal = document.getElementById('info-modal');
+  modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+}
 // Load image dynamically
 function loadImage(src) {
   return new Promise((resolve) => {
