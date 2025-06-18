@@ -8,10 +8,7 @@ let necklaceSrc = 'necklaces/necklace1.png';
 
 let earringImg = null;
 let necklaceImg = null;
-function toggleInfoModal() {
-  const modal = document.getElementById('info-modal');
-  modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-}
+
 // Load image dynamically
 function loadImage(src) {
   return new Promise((resolve) => {
@@ -209,4 +206,63 @@ function takeSnapshot() {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}let lastSnapshotDataURL = ''; // Global to hold last image
+
+function takeSnapshot() {
+  const snapshotCanvas = document.createElement('canvas');
+  const ctx = snapshotCanvas.getContext('2d');
+
+  snapshotCanvas.width = videoElement.videoWidth;
+  snapshotCanvas.height = videoElement.videoHeight;
+
+  // Draw video
+  ctx.drawImage(videoElement, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
+
+  // Overlay jewelry
+  if (currentMode === 'earring' && earringImg) {
+    const leftSmooth = smooth(leftEarPositions);
+    const rightSmooth = smooth(rightEarPositions);
+    if (leftSmooth) ctx.drawImage(earringImg, leftSmooth.x - 60, leftSmooth.y, 100, 100);
+    if (rightSmooth) ctx.drawImage(earringImg, rightSmooth.x - 20, rightSmooth.y, 100, 100);
+  }
+
+  if (currentMode === 'necklace' && necklaceImg) {
+    const chinSmooth = smooth(chinPositions);
+    if (chinSmooth) ctx.drawImage(necklaceImg, chinSmooth.x - 100, chinSmooth.y, 300, 150);
+  }
+
+  // Convert to image and show in modal
+  lastSnapshotDataURL = snapshotCanvas.toDataURL('image/png');
+  document.getElementById('snapshot-preview').src = lastSnapshotDataURL;
+  document.getElementById('snapshot-modal').style.display = 'block';
+}
+function saveSnapshot() {
+  const link = document.createElement('a');
+  link.href = lastSnapshotDataURL;
+  link.download = `jewelry-tryon-${Date.now()}.png`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function shareSnapshot() {
+  if (navigator.share) {
+    fetch(lastSnapshotDataURL)
+      .then(res => res.blob())
+      .then(blob => {
+        const file = new File([blob], `jewelry-tryon.png`, { type: 'image/png' });
+        navigator.share({
+          title: 'Jewelry Try-On',
+          text: 'Check out my look!',
+          files: [file]
+        });
+      })
+      .catch(console.error);
+  } else {
+    alert('Sharing not supported on this browser.');
+  }
+}
+
+function closeSnapshotModal() {
+  document.getElementById('snapshot-modal').style.display = 'none';
 }

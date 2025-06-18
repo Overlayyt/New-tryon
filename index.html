@@ -15,6 +15,17 @@
   <div id="branding">
     <img src="cameraicon.png" alt="Camera Icon" class="camera-icon" style="width: 52px; height: 52px;" />
   </div>
+  <div id="snapshot-modal" style="display: none; position: fixed; top: 50%; left: 50%;
+     transform: translate(-50%, -50%); background: #fff; border-radius: 12px;
+     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); z-index: 9999; padding: 20px; text-align: center;">
+  <h3>Snapshot Preview</h3>
+  <img id="snapshot-preview" src="" alt="Snapshot" style="width: 100%; max-width: 400px; border-radius: 10px; margin-bottom: 10px;" />
+  <div style="display: flex; justify-content: space-around; gap: 10px;">
+    <button onclick="saveSnapshot()" style="padding: 8px 16px;">Save</button>
+    <button onclick="shareSnapshot()" style="padding: 8px 16px;">Share</button>
+    <button onclick="closeSnapshotModal()" style="padding: 8px 16px;">Close</button>
+  </div>
+</div>
 
   <!-- Mode Selection Buttons -->
   <div id="jewelry-mode">
